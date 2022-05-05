@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "sebakpetra_fb8ypq_10hazifeladat_csharp/1.0.0": {
+        "runtime": {
+          "sebakpetra_fb8ypq_10hazifeladat_csharp.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "sebakpetra_fb8ypq_10hazifeladat_csharp/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

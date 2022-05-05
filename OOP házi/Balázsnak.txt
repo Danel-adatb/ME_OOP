@@ -1,0 +1,12 @@
+	private static void egysegArnagyobbMint(Konyv[] konyvek) {
+		ArrayList<String> vizsgaltSzerzo = new ArrayList<String>();
+		for (Konyv konyv : konyvek) {
+			String szerzo = konyv.getSzerzo();
+			if (!vizsgaltSzerzo.contains(szerzo)) {
+				vizsgaltSzerzo.add(szerzo);
+				if (konyv.egysegAr() > 20) {
+					System.out.println("Szerző: " + szerzo);
+				}
+			}
+		}
+	}

@@ -1,0 +1,119 @@
+public class Konyv_prog {
+
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		
+		System.out.println("Hány darab könyvet szeretne beolvasni?");
+		int n = input.nextInt();
+		input.nextLine();
+		
+		Konyv[] konyvek = new Konyv[n];
+		
+		for(int i = 0; i < konyvek.length;i++) {
+        	System.out.println((i+1) + ". Könyv címe: ");
+        	String cim = input.nextLine();
+        	System.out.println((i+1) + ". Könyv szerzője: ");
+        	String szerzo = input.nextLine();
+        	System.out.println((i+1) + ". Könyv ára (0-t ütve alapértéket[2500] kap): ");
+        	int ar = input.nextInt();
+        	System.out.println((i+1) + ". Könyv oldalainak a száma: ");
+        	int oldalsz = input.nextInt();
+        	input.nextLine();
+        	
+        	if(ar == 0) {
+        		konyvek[i] = new Konyv(cim, szerzo, oldalsz);
+        	} else {
+        		konyvek[i] = new Konyv(cim, szerzo, ar, oldalsz);
+        	}
+        }
+       
+		kiiratKonyvek(konyvek);
+		
+		System.out.println("\nLeghosszabb konyv adatai: " + konyvek[hosszu(konyvek)].toString());
+		
+		if (hosszuParos(konyvek) == 0) {
+			System.out.println("Nincs páros oldalszámú könyv!");
+		} else {
+			System.out.println("Leghosszabb PÁROS konyv adatai: " + konyvek[hosszuParos(konyvek)].toString());
+		}
+		System.out.println();
+		
+		szerzoDbszam(konyvek, n);
+		input.close();
+	}
+	
+	static void kiiratKonyvek(Konyv[] konyvek) {
+		   for(Konyv konyv : konyvek) {
+			   System.out.println(konyv.toString());
+		   }
+	   }
+	
+	static int hosszu(Konyv[] konyvek) {
+		int maxindex = 0;
+		
+		for (int i = 0; i < konyvek.length; i++) {
+			if (konyvek[i].getOldal() > konyvek[maxindex].getOldal()) {
+				maxindex = i;
+			}
+		}
+		
+		return maxindex;
+		
+	}
+	
+	static int hosszuParos(Konyv[] konyvek) {
+		int maxindex = 1;
+		
+		//Ha páros van elsőnek, és utána páratlan, akkor az első párost nem nézi, rosszul működik!
+		
+		for (int i = 0; i < konyvek.length; ++i) {
+			if (konyvek[i].parosOldal()) {
+				maxindex = i;
+				break;
+			} 
+		}
+		
+		if (maxindex == 1) {
+			return 0;
+		} else {
+			for (int i = 0; i < konyvek.length; i++) {
+				if ((konyvek[i].getOldal() > konyvek[maxindex].getOldal()) && (konyvek[i].getOldal() % 2 == 0)) {
+					maxindex = i;
+				}
+			}
+			return maxindex;
+		}
+	}
+	
+	static void szerzoDbszam(Konyv[] konyvek, int n) {
+		int k=0,l,x, db;
+		Konyv[] feldolgozott = new Konyv[n];
+		
+		//Ha több darab van, akkor többször is írja ki, ami nekem nem kell....
+		
+		for (int i = 0; i < konyvek.length; i++) {
+	        x=0;
+	            for(l=0 ; l<k ; l++) {
+	                if (konyvek[i].getSzerzo() == feldolgozott[l].getSzerzo()) {
+	                    x=1;
+	                }
+	            }
+
+	                if (x==1) {
+	                    continue;
+	                }
+
+	        db=0;
+	        for (int j = 0 ; j < konyvek.length ; j++) {
+	            if (konyvek[i].getSzerzo().contentEquals(konyvek[j].getSzerzo())) {
+	                db++;
+	            }
+	        }
+
+	        if (db>0) {
+	            feldolgozott[k++] = konyvek[i];
+	            System.out.println("Szerző: " + konyvek[i].getSzerzo() + " - " + db + "db könyve jelent meg");
+	        }
+	    }			
+	}
+}

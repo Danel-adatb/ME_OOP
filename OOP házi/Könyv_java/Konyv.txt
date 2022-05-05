@@ -1,0 +1,110 @@
+public class Konyv {
+	private String cim;
+	private String szerzo;
+	private int ar;
+	private int ev;
+	private int oldalsz;
+	private String kiado = "Móra";
+	
+	//--------------------
+	
+	public Konyv(String cim, String szerzo, int ar, int oldalsz) {
+		super();
+		java.time.LocalDate currentDate = java.time.LocalDate.now();
+		
+		this.cim = cim;
+		this.szerzo = szerzo;
+		this.ar = ar;
+		this.oldalsz = oldalsz;
+		this.ev = currentDate.getYear();
+	}
+	
+	public Konyv(String cim, String szerzo, int oldalsz) {
+		java.time.LocalDate currentDate = java.time.LocalDate.now();
+		
+		this.cim = cim;
+		this.szerzo = szerzo;
+		this.ar = 2500;
+		this.oldalsz = oldalsz;
+		this.ev = currentDate.getYear();
+	}
+	
+	//--------------------
+	
+	@Override
+	public String toString() {		
+		return "Könyv címe: " + cim + ", szerzője: " + szerzo + ", ára: " + ar + ", kiadás éve: " + ev + ", oldalainak száma: " + oldalsz + ", kiadó: " + kiado;
+	}
+	
+	//--------------------
+	
+	public void arNoveles(int plusz) {
+		ar += plusz;
+	}
+	
+	public String kiirKonyv() {		
+		return "Könyv címe: " + cim + ", szerzője: " + szerzo + ", ára: " + ar + ", kiadás éve: " + ev;
+	}
+	
+	//----------Getterek, Setterek----------
+	
+	public String getCim() {
+		return cim;
+	}
+
+	public void setCim(String cim) {
+		this.cim = cim;
+	}
+
+	public int getAr() {
+		return ar;
+	}
+
+	public void setAr(int ar) {
+		this.ar = ar;
+	}
+	
+	public String getSzerzo() {
+		return szerzo;
+	}
+
+	public void setSzerzo(String szerzo) {
+		this.szerzo = szerzo;
+	}
+	
+	public int getEv() {
+		return ev;
+	}
+	
+	public void setEv(int ev) {
+		this.ev = ev;
+	}
+	
+	public int getOldal() {
+		return oldalsz;
+	}
+
+	public void setOldal(int oldalsz) {
+		this.oldalsz = oldalsz;
+	}
+	
+	//Eldönti, hogy melyiknek hosszabbak az oldalai:
+	
+	public Konyv melyikHosszabb(Konyv alany1, Konyv alany2) {
+		if (alany1.oldalsz > alany2.oldalsz) {
+			return alany1;
+		} else {
+			return alany2;
+		}
+	}
+	
+	//Eldönti, hogy az oldalal száma páros-e:
+	
+	public boolean parosOldal() {
+		if (this.oldalsz % 2 == 0) {
+			return true;
+		}
+		
+		return false;
+	}
+}
